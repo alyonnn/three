@@ -8,7 +8,13 @@
     --body-font: 'Quicksand', sans-serif;
     --transition-speed: 0.4s;
 }
-
+html, body {
+    height: 100%; /* Заставляем HTML и BODY занимать всю высоту окна */
+    margin: 0;
+    padding: 0;
+    /* Убираем горизонтальную прокрутку, если есть */
+    overflow-x: hidden; 
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -20,8 +26,14 @@ body {
     background-color: #fff;
     color: var(--text-color);
     padding-bottom: 80px;
+    
 }
-
+#main-content-wrapper {
+    flex-grow: 1; /* Занимает все доступное пространство */
+    /* РЕШЕНИЕ ПРОБЛЕМЫ: Резервируем место 60px + 5px (padding top/bottom) 
+       для фиксированного мобильного меню. */
+    padding-bottom: 70px; 
+}
 /* --- ИСПРАВЛЕНО: СТИЛЬ H2 (Заголовок "Путь, Который Мы Прошли") --- */
 h2 {
     /* Изменено на Quicksand */
@@ -347,6 +359,7 @@ h2 {
     background-color: var(--primary-color);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    height: 60px; /* Установите фактическую высоту, которую занимает меню */
     padding: 5px 0;
 }
 
@@ -387,7 +400,9 @@ h2 {
         padding: 20px;
         box-shadow: none;
     }
-
+#main-content-wrapper {
+        padding-bottom: 0;
+    }
     .page-section {
         max-width: 900px;
         margin: 0 auto;
