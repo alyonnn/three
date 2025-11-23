@@ -486,8 +486,11 @@ h2 {
 
 /* Делаем фото в хронике кликабельными */
 .timeline-clickable-photo {
-    cursor: zoom-in;
-    transition: transform 0.2s;
+   display: block; 
+    height: auto; 
+    width: 100%; /* Занимает всю ширину контейнера */
+    aspect-ratio: 3 / 4; /* Указываем соотношение сторон: ширина / высота */
+    object-fit: cover; /* Чтобы фото полностью заполняло рамку */
 }
 
 .timeline-clickable-photo:active {
