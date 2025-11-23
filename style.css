@@ -1,9 +1,10 @@
 /* Глобальные стили и Шрифты */
 :root {
-    --primary-color: #ff6f61; /* Теплый коралловый */
-    --secondary-color: #f7cac9; /* Очень светлый розовый */
-    --text-color: #333;
-    --header-font: 'Pacifico', cursive; /* Рукописный для вау-эффекта */
+    --primary-color: #e91e63; /* Глубокий розовый/фуксия - яркий акцент */
+    --secondary-color: #fce4ec; /* Очень светлый, почти белый розовый - основной фон */
+    --accent-color: #f06292; /* Средний розовый - для hover-эффектов, кнопок */
+    --text-color: #333; /* Останется темным для контраста */
+    --header-font: 'Pacifico', cursive;
     --body-font: 'Quicksand', sans-serif;
     --transition-speed: 0.4s;
 }
@@ -16,14 +17,14 @@
 
 body {
     font-family: var(--body-font);
-    background-color: #fff;
+    background-color: #fff; /* Фон body останется белым, чтобы secondary-color был фоном секций */
     color: var(--text-color);
-    padding-bottom: 80px; /* Место для футера-меню */
+    padding-bottom: 80px;
 }
 
 h2 {
     font-family: var(--header-font);
-    color: var(--primary-color);
+    color: var(--primary-color); /* Основной розовый */
     text-align: center;
     margin-bottom: 30px;
     font-size: 2.2em;
@@ -32,7 +33,7 @@ h2 {
 
 /* СТИЛИ СЕКЦИЙ И ПЕРЕКЛЮЧЕНИЯ */
 .page-section {
-    min-height: calc(100vh - 80px); /* Почти на весь экран */
+    min-height: calc(100vh - 80px);
     padding: 20px;
     opacity: 0;
     transform: translateY(20px);
@@ -65,17 +66,15 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Заглушка: замените на вашу большую красивую картинку */
-    background-image: url('https://picsum.photos/id/1060/1200/900'); 
+    background-image: url('image/photo_37_2025-11-12_14-30-00.jpg');
     background-size: cover;
     background-position: center;
-    /* Анимация параллакса будет в JS */
 }
 
 .content-overlay {
     position: relative;
     z-index: 2;
-    background: rgba(255, 255, 255, 0.85); /* Полупрозрачный фон для текста */
+    background: rgba(255, 255, 255, 0.85);
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
@@ -83,7 +82,7 @@ h2 {
 
 .main-title {
     font-family: var(--header-font);
-    color: var(--primary-color);
+    color: var(--primary-color); /* Основной розовый */
     font-size: 2.5em;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -92,14 +91,14 @@ h2 {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: var(--secondary-color);
+    background: var(--secondary-color); /* Очень светлый розовый */
     margin: 20px auto;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 3em;
     border: 5px solid white;
-    box-shadow: 0 0 15px rgba(255, 111, 97, 0.5); /* Свечение */
+    box-shadow: 0 0 15px rgba(233, 30, 99, 0.5); /* Свечение в тон primary-color */
 }
 
 .countdown-wow {
@@ -112,8 +111,8 @@ h2 {
     display: block;
     font-size: 3em;
     font-weight: bold;
-    color: var(--primary-color);
-    animation: pulse 1.5s infinite alternate; /* Анимация счетчика */
+    color: var(--primary-color); /* Основной розовый */
+    animation: pulse 1.5s infinite alternate;
 }
 
 @keyframes pulse {
@@ -122,7 +121,7 @@ h2 {
 }
 
 .cta-button {
-    background: var(--primary-color);
+    background: var(--primary-color); /* Основной розовый */
     color: white;
     border: none;
     padding: 12px 25px;
@@ -136,6 +135,7 @@ h2 {
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: var(--accent-color); /* Средний розовый для hover */
 }
 
 /* --- 2. Секция TIMELINE --- */
@@ -144,14 +144,14 @@ h2 {
     margin: 0 auto;
     position: relative;
     padding-left: 25px;
-    border-left: 3px solid var(--secondary-color);
+    border-left: 3px solid var(--secondary-color); /* Очень светлый розовый */
 }
 
 .timeline-item {
     margin-bottom: 40px;
     position: relative;
     padding: 15px;
-    background: #fffafa;
+    background: #fffafa; /* Нейтральный светлый фон */
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -163,7 +163,7 @@ h2 {
     width: 30px;
     height: 30px;
     background: white;
-    border: 4px solid var(--primary-color);
+    border: 4px solid var(--primary-color); /* Основной розовый */
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -182,7 +182,7 @@ h2 {
 .flip-card {
     background-color: transparent;
     height: 180px;
-    perspective: 1000px; /* Создает 3D эффект */
+    perspective: 1000px;
 }
 
 .flip-card-inner {
@@ -205,7 +205,7 @@ h2 {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden; 
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 10px;
     padding: 20px;
@@ -216,13 +216,13 @@ h2 {
 }
 
 .flip-card-front {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color); /* Очень светлый розовый */
     color: var(--text-color);
     cursor: pointer;
 }
 
 .flip-card-back {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Основной розовый */
     color: white;
     transform: rotateY(180deg);
 }
@@ -237,7 +237,7 @@ h2 {
 .slider-container {
     position: relative;
     max-width: 90vw;
-    height: 400px; /* Фиксированная высота */
+    height: 400px;
     margin: 0 auto;
     border-radius: 15px;
     overflow: hidden;
@@ -287,7 +287,7 @@ h2 {
 
 .slider-btn:hover {
     background: rgba(255, 255, 255, 0.6);
-    color: var(--primary-color);
+    color: var(--primary-color); /* Основной розовый */
 }
 
 #prev-btn { left: 10px; }
@@ -302,7 +302,7 @@ h2 {
     width: 100%;
     display: flex;
     justify-content: space-around;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Основной розовый */
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
     z-index: 50;
     padding: 5px 0;
@@ -341,12 +341,11 @@ h2 {
 /* На десктопе меню может быть скрыто или стилизовано иначе */
 @media (min-width: 768px) {
     #mobile-nav {
-        /* Футер навигация на десктопе менее важна */
         position: static;
         padding: 20px;
         box-shadow: none;
     }
-    
+
     .page-section {
         max-width: 900px;
         margin: 0 auto;
@@ -357,4 +356,21 @@ h2 {
     .main-title {
         font-size: 3.5em;
     }
+}
+/* Дополнительный стиль для фото в таймлайне */
+/* Обновленный стиль для фото в таймлайне (без обрезки) */
+.timeline-photo {
+    width: 100%; /* Фото занимает всю ширину родительского блока */
+    max-height: 250px; /* Ограничиваем максимальную высоту */
+    
+    /* ***** КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: CONTAIN ***** */
+    object-fit: contain; 
+    
+    border-radius: 6px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    display: block;
+    
+    /* Добавляем фон, если фото не заполняет всю область (будет розовое поле по бокам) */
+    background-color: var(--secondary-color); 
 }
