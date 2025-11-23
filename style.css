@@ -65,98 +65,168 @@ h2 {
 }
 
 /* --- 1. Секция HOME (Параллакс) --- */
+/* ------------------------------------------------ */
+/* --- СТИЛИ ДЛЯ ГЛАВНОЙ СТРАНИЦЫ (HOME) --- */
+/* ------------------------------------------------ */
+
 #home {
     position: relative;
-    min-height: 100vh;
+    color: var(--accent-color); /* Весь текст белый на фоне */
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     text-align: center;
-    overflow: hidden;
+    overflow: hidden; /* Скрываем части параллакса */
+    min-height: 100vh;
 }
 
 .parallax-bg {
+    /* Если это ваша обложка, она должна быть растянута */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('image/photo_37_2025-11-12_14-30-00.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center center;
+box-shadow: inset 0 0 0 1000px rgba(255, 142, 175, 0.2); /* Цвет --primary-color с прозрачностью */
+    z-index: 1;
 }
 
 .content-overlay {
     position: relative;
-    z-index: 2;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Поверх параллакса */
+    padding: 20px;
+background: rgba(255, 255, 255, 0.95); /* Почти непрозрачный белый */    border-radius: 15px;
+    backdrop-filter: blur(1px); /* Мягкое размытие */
+    margin-top: 50px; /* Чтобы не наезжало на верх экрана */
 }
 
-/* --- ИСПРАВЛЕНО: СТИЛЬ .main-title (Заголовок "Все случайное...") --- */
+/* ЗАГОЛОВКИ */
 .main-title {
-    /* Изменено на Quicksand */
-    font-family: var(--body-font);
-    color: var(--primary-color);
-    /* Уменьшен размер */
-    font-size: 1.6em;
+    font-size: 2.2em; /* Меньше на моб., чтобы поместилось */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    margin-bottom: 20px;
+    color: var(--accent-color);
+}
+
+.main-date-label {
+    font-family: 'Lora', sans-serif;
     font-weight: 700;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.photo-placeholder {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: var(--secondary-color);
-    margin: 20px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3em;
-    border: 5px solid white;
-    box-shadow: 0 0 15px rgba(233, 30, 99, 0.5);
-}
-
-.countdown-wow {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-}
-
-.countdown-wow span {
-    display: block;
-    font-size: 3em;
-    font-weight: bold;
-    color: var(--primary-color);
-    animation: pulse 1.5s infinite alternate;
-}
-
-@keyframes pulse {
-    from { transform: scale(1); }
-    to { transform: scale(1.05); }
-}
-
-.cta-button {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
     font-size: 1.1em;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.personal-tagline {
+    font-family: 'Lora', sans-serif;
+    font-style: italic;
+    opacity: 0.8;
     margin-top: 15px;
 }
 
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    background: var(--accent-color);
+
+/* ФОТОГРАФИЯ (С акцентом) */
+.photo-container-wow {
+    width: 180px; /* Размер контейнера */
+    height: 180px;
+    margin: 30px auto 25px; /* Отступы: сверху, по бокам, снизу */
+    border-radius: 50%;
+    background: var(--primary-color); 
+    box-shadow: 0 0 15px 5px var(--primary-color), 
+                0 0 25px 10px rgba(255, 255, 255, 0.3); /* Эффект свечения */
+    padding: 5px; /* Рамка вокруг фото */
+    overflow: hidden;
+    transform: rotate(-3deg); /* Добавляем игривый наклон */
+    transition: transform 0.3s ease;
 }
 
+.photo-container-wow:hover {
+    transform: rotate(3deg) scale(1.05);
+}
+
+.main-anniversary-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: center;
+    display: block;
+}
+
+
+/* СЧЕТЧИК (Визуальное выделение) */
+.countdown-wow {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.95); /* Светлый фон для контраста */
+    color: var(--primary-color); 
+    padding: 15px 10px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    margin-top: 10px;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.count-item {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.8em;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    padding: 0 5px;
+}
+
+.count-item span {
+    display: block;
+    font-size: 2.2em;
+    font-weight: 900;
+    color: #ff4d88; /* Более яркий акцент для чисел */
+}
+
+/* Кнопка CTA */
+.cta-button {
+    margin-top: 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: var(--shadow-light);
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.cta-button:hover {
+    background-color: #ff6699;
+    transform: translateY(-2px);
+}
+
+/* Стили для Десктопа (Увеличение заголовков) */
+@media (min-width: 768px) {
+    .main-title {
+        font-size: 3.5em; 
+    }
+    .photo-container-wow {
+        width: 250px;
+        height: 250px;
+    }
+    .countdown-wow {
+        max-width: 500px;
+        padding: 20px 30px;
+    }
+    .count-item span {
+        font-size: 3em;
+    }
+    .content-overlay {
+        padding: 40px;
+    }
+}
 /* --- 2. Секция TIMELINE --- */
 .timeline-container {
     max-width: 600px;
