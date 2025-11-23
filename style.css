@@ -76,6 +76,7 @@ h2 {
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding-top: 50px;
     overflow: hidden; /* Скрываем части параллакса */
     min-height: 100vh;
 }
@@ -569,15 +570,195 @@ background: rgba(255, 255, 255, 0.95); /* Почти непрозрачный б
     font-size: 1.2em;
 }
 
-/* Делаем фото в хронике кликабельными */
+/* Дополнительный стиль для фото в таймлайне */
+/* Дополнительный стиль для фото в таймлайне */
 .timeline-clickable-photo {
-   display: block; 
+    display: block; 
+    width: 100%; 
     height: auto; 
-    width: 100%; /* Занимает всю ширину контейнера */
-    aspect-ratio: 3 / 4; /* Указываем соотношение сторон: ширина / высота */
-    object-fit: cover; /* Чтобы фото полностью заполняло рамку */
+    
+    /* Устанавливаем вертикальное соотношение сторон 3:4 */
+    aspect-ratio: 3 / 4; 
+    
+    /* ГЛАВНОЕ ИЗМЕНЕНИЕ: 
+    Используем 'contain', чтобы показать фото ЦЕЛИКОМ. 
+    Если фото горизонтально, по бокам/сверху/снизу появятся ПУСТЫЕ ПОЛОСЫ (прозрачный фон).
+    Это единственный способ показать его целиком, не меняя пропорции.
+    */
+    object-fit: contain; 
+    
+    /* Добавляем фон, чтобы пустые полосы не были прозрачными, а были розовыми/белыми */
+    background-color: var(--secondary-color); /* Очень светлый розовый */
+    
+    border-radius: 6px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .timeline-clickable-photo:active {
     transform: scale(0.98);
 }
+/* --- СТИЛИ ДЛЯ СЕКЦИИ МОМЕНТОВ --- */
+
+.section-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+/* --- Стили для ВИДЕО-СЕТКИ --- */
+
+.video-grid-container {
+    display: grid;
+    /* На телефоне: 2 колонки, чтобы было удобнее кликать */
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px;
+    padding: 0 10px;
+}
+
+/* --- Стили для КАРТОЧЕК В СЕТКЕ --- */
+
+.video-item {
+    background-color: var(--secondary-color);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border: 3px solid var(--primary-color); 
+}
+
+/* --- КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ: Унификация размеров превью --- */
+
+.video-item video {
+    width: 100%;
+    height: auto; /* Позволяем высоте подстраиваться под контент */
+    display: block;
+    
+    /* УДАЛИТЬ: aspect-ratio: 3 / 4; <--- Это принуждает высоту! */
+    
+    /* УСТАНОВИМ МАКСИМАЛЬНУЮ ВЫСОТУ, чтобы они не были слишком длинными */
+    max-height: 250px; /* Например, 250px. Вы можете настроить это значение. */
+    
+    /* Сохраняем пропорции: показываем видео целиком внутри его контейнера */
+    object-fit: contain; 
+}
+
+/* 2. Стиль для ГРУППОВЫХ ВИДЕО (тег <img>) */
+.video-item .video-group-poster {
+    width: 100%;
+    height: auto;
+    display: block;
+    
+    /* УДАЛИТЬ: aspect-ratio: 3 / 4; <--- Это принуждает высоту! */
+    
+    /* УСТАНОВИМ ТАКУЮ ЖЕ МАКСИМАЛЬНУЮ ВЫСОТУ */
+    max-height: 250px; /* То же самое значение, что и выше */
+    
+    /* Сохраняем пропорции: показываем постер целиком */
+    object-fit: contain; 
+}
+/* --- Стили для текста (для контекста) --- */
+.video-item h3 {
+    font-size: 1.3em;
+    color: var(--primary-color);
+    margin: 10px 10px 5px;
+}
+
+.video-item p {
+    padding: 0 15px 15px;
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+/* --- НОВОЕ: Стили Модального Окна для Видео --- */
+#videoModal {
+    display: none;
+    position: fixed;
+    z-index: 3000; /* Выше, чем фото-модалка */
+    padding-top: 10px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.95);
+}
+
+.video-modal-content {
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем видео по горизонтали */
+    justify-content: center; /* Центрируем видео по вертикали */
+    width: 95%;
+    max-width: 800px;
+    background: #000;
+    border-radius: 10px;
+    
+    /* Добавляем ограничение по высоте для контейнера */
+    height: 90vh; 
+}
+
+#videoPlayer {
+    /* ГЛАВНОЕ ИСПРАВЛЕНИЕ: Ограничиваем размер плеера */
+    width: auto; 
+    max-width: 100%; 
+    height: auto; 
+    max-height: 80vh; /* Должно быть одинаковым для всех медиа */
+    
+    display: block;
+    object-fit: contain;
+}
+
+#videoCaption {
+    text-align: center;
+    color: #fff;
+    padding: 15px;
+    font-size: 1.2em;
+}
+/* --- НОВОЕ: Контейнер для центрирования в #photoModal --- */
+.modal-content-wrapper {
+    /* Центрирование контента и ограничение его размера */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%; /* Ширина на телефоне */
+    max-width: 900px; /* Макс. ширина на десктопе */
+    height: 90vh; /* Занимает почти всю высоту окна */
+}
+
+/* --- Стили для ФОТО внутри #photoModal (Галерея и История) --- */
+#modalImage {
+    display: block;
+    
+    /* Ограничиваем размер фото */
+    width: auto; /* Позволяет ширине подстраиваться под высоту */
+    max-width: 100%; /* Не шире, чем контейнер */
+    height: auto; /* Позволяет высоте подстраиваться под ширину */
+    max-height: 80vh; /* Максимальная высота, чтобы оставалось место для подписи и навигации */
+    
+    /* Сохраняет пропорции: изображение целиком видно */
+    object-fit: contain; 
+    
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+/* --- Стили для ГРУППОВОГО ВИДЕО внутри #photoModal --- */
+#groupVideoPlayer {
+    width: 100%; /* Занимает всю ширину контейнера */
+    height: auto;
+    max-width: 100%;
+    max-height: 80vh; /* Должно быть таким же, как для фото */
+    
+    object-fit: contain; /* Обеспечивает, что вертикальное видео целиком видно */
+    
+    animation-name: zoom;
+    animation-duration: 0.6s;
+    border-radius: 5px;
+}
+/* Кнопка закрытия та же, что и для фото-модалки */
