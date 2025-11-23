@@ -299,12 +299,13 @@ h2 {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    right: 0; /* Добавляем right: 0; для надежности */
+    width: 100%; /* Можно оставить для перестраховки */
     display: flex;
     justify-content: space-around;
-    background-color: var(--primary-color); /* Основной розовый */
+    background-color: var(--primary-color); 
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 50;
+    z-index: 1000; /* Поднимаем повыше */
     padding: 5px 0;
 }
 
@@ -373,4 +374,76 @@ h2 {
     
     /* Добавляем фон, если фото не заполняет всю область (будет розовое поле по бокам) */
     background-color: var(--secondary-color); 
+}
+/* --- НОВОЕ: Стили Модального Окна (Pop-up) --- */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Закреплено на экране */
+    z-index: 2000; /* Очень высокий Z-index, чтобы быть поверх всего */
+    padding-top: 50px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9); /* Черный с прозрачностью */
+    cursor: pointer;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    object-fit: contain; /* Чтобы фото не обрезалось */
+    animation-name: zoom;
+    animation-duration: 0.6s;
+    border-radius: 5px;
+}
+
+/* Анимация (Масштабирование) */
+@keyframes zoom {
+    from {transform: scale(0.1)} 
+    to {transform: scale(1)}
+}
+
+/* Кнопка Закрытия */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--primary-color); /* Розовый при наведении */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Подпись под фото */
+.modal-caption {
+    margin: 10px auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    font-size: 1.2em;
+}
+
+/* Делаем фото в хронике кликабельными */
+.timeline-clickable-photo {
+    cursor: zoom-in; /* Курсор-лупа */
+    transition: transform 0.2s;
+}
+.timeline-clickable-photo:active {
+    transform: scale(0.98);
 }

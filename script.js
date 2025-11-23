@@ -127,3 +127,43 @@ window.addEventListener('scroll', function() {
         parallaxBg.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
     }
 });
+// --- 7. НОВОЕ: Открытие фото в полный размер (Модальное Окно) ---
+
+const modal = document.getElementById("photoModal");
+const modalImg = document.getElementById("modalImage");
+const captionText = document.getElementById("caption");
+const timelinePhotos = document.querySelectorAll('.timeline-clickable-photo');
+
+// Функция открытия модального окна
+timelinePhotos.forEach(photo => {
+    photo.addEventListener('click', function() {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        
+        // Берем подпись из следующего элемента <p> в DOM
+        let timelineItem = this.closest('.timeline-item');
+        let textElement = timelineItem ? timelineItem.querySelector('p') : null;
+        
+        if (textElement) {
+            // Устанавливаем текст и дату из хроники
+            let dateElement = timelineItem.querySelector('h3');
+            let dateText = dateElement ? dateElement.textContent : '';
+            captionText.innerHTML = `<strong>${dateText}</strong><br>${textElement.textContent}`;
+        } else {
+            captionText.textContent = this.alt;
+        }
+    });
+});
+
+// Функция закрытия модального окна
+function closeModal() {
+    modal.style.display = "none";
+}
+
+// Закрытие при клике на крестик или на черную область
+modal.addEventListener('click', function(e) {
+    // Закрываем, только если клик был на самом модальном окне или на кнопке закрытия
+    if (e.target.classList.contains('modal') || e.target.classList.contains('modal-content') || e.target.classList.contains('close-btn')) {
+        closeModal();
+    }
+});
