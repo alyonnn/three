@@ -17,17 +17,20 @@
 
 body {
     font-family: var(--body-font);
-    background-color: #fff; /* Фон body останется белым, чтобы secondary-color был фоном секций */
+    background-color: #fff;
     color: var(--text-color);
     padding-bottom: 80px;
 }
 
+/* --- ИСПРАВЛЕНО: СТИЛЬ H2 (Заголовок "Путь, Который Мы Прошли") --- */
 h2 {
-    font-family: var(--header-font);
-    color: var(--primary-color); /* Основной розовый */
+    /* Изменено на Quicksand */
+    font-family: var(--body-font);
+    color: var(--primary-color);
     text-align: center;
     margin-bottom: 30px;
-    font-size: 2.2em;
+    /* Уменьшен размер */
+    font-size: 1.8em;
     padding-top: 10px;
 }
 
@@ -80,10 +83,14 @@ h2 {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* --- ИСПРАВЛЕНО: СТИЛЬ .main-title (Заголовок "Все случайное...") --- */
 .main-title {
-    font-family: var(--header-font);
-    color: var(--primary-color); /* Основной розовый */
-    font-size: 2.5em;
+    /* Изменено на Quicksand */
+    font-family: var(--body-font);
+    color: var(--primary-color);
+    /* Уменьшен размер */
+    font-size: 1.6em;
+    font-weight: 700;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -91,14 +98,14 @@ h2 {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: var(--secondary-color); /* Очень светлый розовый */
+    background: var(--secondary-color);
     margin: 20px auto;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 3em;
     border: 5px solid white;
-    box-shadow: 0 0 15px rgba(233, 30, 99, 0.5); /* Свечение в тон primary-color */
+    box-shadow: 0 0 15px rgba(233, 30, 99, 0.5);
 }
 
 .countdown-wow {
@@ -111,7 +118,7 @@ h2 {
     display: block;
     font-size: 3em;
     font-weight: bold;
-    color: var(--primary-color); /* Основной розовый */
+    color: var(--primary-color);
     animation: pulse 1.5s infinite alternate;
 }
 
@@ -121,7 +128,7 @@ h2 {
 }
 
 .cta-button {
-    background: var(--primary-color); /* Основной розовый */
+    background: var(--primary-color);
     color: white;
     border: none;
     padding: 12px 25px;
@@ -135,7 +142,7 @@ h2 {
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    background: var(--accent-color); /* Средний розовый для hover */
+    background: var(--accent-color);
 }
 
 /* --- 2. Секция TIMELINE --- */
@@ -144,14 +151,14 @@ h2 {
     margin: 0 auto;
     position: relative;
     padding-left: 25px;
-    border-left: 3px solid var(--secondary-color); /* Очень светлый розовый */
+    border-left: 3px solid var(--secondary-color);
 }
 
 .timeline-item {
     margin-bottom: 40px;
     position: relative;
     padding: 15px;
-    background: #fffafa; /* Нейтральный светлый фон */
+    background: #fffafa;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -163,7 +170,7 @@ h2 {
     width: 30px;
     height: 30px;
     background: white;
-    border: 4px solid var(--primary-color); /* Основной розовый */
+    border: 4px solid var(--primary-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -216,13 +223,13 @@ h2 {
 }
 
 .flip-card-front {
-    background-color: var(--secondary-color); /* Очень светлый розовый */
+    background-color: var(--secondary-color);
     color: var(--text-color);
     cursor: pointer;
 }
 
 .flip-card-back {
-    background-color: var(--primary-color); /* Основной розовый */
+    background-color: var(--primary-color);
     color: white;
     transform: rotateY(180deg);
 }
@@ -232,80 +239,114 @@ h2 {
     margin-bottom: 10px;
 }
 
+/* ... (Ваш предыдущий CSS до этой секции) ... */
 
-/* --- 4. Секция GALLERY --- */
-.slider-container {
-    position: relative;
-    max-width: 90vw;
-    height: 400px;
+/* --- 4. Секция GALLERY: НОВЫЕ СТИЛИ КАРТОЧЕК --- */
+
+.gallery-card-container {
+    max-width: 900px;
     margin: 0 auto;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: grid;
+    /* Создаем адаптивную сетку: минимум 200px, 1fr */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
 }
 
-.slide-item {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 0.8s ease-in-out;
-    display: flex;
-    align-items: flex-end;
-}
-
-.slide-item.active-slide {
-    opacity: 1;
-}
-
-.slide-caption {
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    width: 100%;
-    padding: 10px;
+.gallery-card {
+    background-color: var(--secondary-color);
+    border-radius: 12px;
+    padding: 30px 20px;
     text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 150px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.slider-btn {
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background-color: var(--accent-color); /* Акцентный цвет при наведении */
+    color: white;
+}
+
+.gallery-card h3 {
+    font-size: 1.8em;
+    margin-bottom: 5px;
+    color: inherit;
+}
+
+.gallery-card p {
+    font-size: 0.9em;
+    color: inherit;
+    opacity: 0.8;
+}
+
+/* --- Стили для модального счетчика --- */
+.modal-counter {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 1em;
+    z-index: 1002; /* Выше, чем кнопки */
+}
+
+/* Медиа-запрос: на телефоне делаем 1 карточку на всю ширину */
+@media (max-width: 600px) {
+    .gallery-card-container {
+        grid-template-columns: 1fr;
+    }
+}
+/* --- Стили для кнопок навигации в модальном окне --- */
+.modal-nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.3);
     color: white;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
     border: none;
-    padding: 15px;
-    font-size: 1.5em;
+    padding: 10px 15px;
     cursor: pointer;
-    z-index: 10;
-    border-radius: 50%;
-    transition: background 0.3s;
+    user-select: none;
+    z-index: 1001; /* Выше, чем изображение */
+    border-radius: 5px;
 }
 
-.slider-btn:hover {
-    background: rgba(255, 255, 255, 0.6);
-    color: var(--primary-color); /* Основной розовый */
+.modal-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
-#prev-btn { left: 10px; }
-#next-btn { right: 10px; }
+#modalPrevBtn {
+    left: 20px;
+}
 
-
+#modalNextBtn {
+    right: 20px;
+}
 /* --- ФУТЕР-МЕНЮ (Мобильная Навигация) --- */
 #mobile-nav {
     position: fixed;
     bottom: 0;
     left: 0;
-    right: 0; /* Добавляем right: 0; для надежности */
-    width: 100%; /* Можно оставить для перестраховки */
+    right: 0;
+    width: 100%;
     display: flex;
     justify-content: space-around;
-    background-color: var(--primary-color); 
+    background-color: var(--primary-color);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Поднимаем повыше */
+    z-index: 1000;
     padding: 5px 0;
 }
 
@@ -354,39 +395,43 @@ h2 {
         padding: 50px 20px;
     }
 
+    /* --- ИСПРАВЛЕНО: СТИЛЬ .main-title для десктопа --- */
     .main-title {
-        font-size: 3.5em;
+        /* Уменьшен размер */
+        font-size: 2.8em;
     }
 }
+
 /* Дополнительный стиль для фото в таймлайне */
 /* Обновленный стиль для фото в таймлайне (без обрезки) */
 .timeline-photo {
-    width: 100%; /* Фото занимает всю ширину родительского блока */
-    max-height: 250px; /* Ограничиваем максимальную высоту */
-    
+    width: 100%;
+    max-height: 250px;
+   
     /* ***** КЛЮЧЕВОЕ ИЗМЕНЕНИЕ: CONTAIN ***** */
-    object-fit: contain; 
-    
+    object-fit: contain;
+   
     border-radius: 6px;
     margin-bottom: 10px;
     margin-top: 10px;
     display: block;
-    
+   
     /* Добавляем фон, если фото не заполняет всю область (будет розовое поле по бокам) */
-    background-color: var(--secondary-color); 
+    background-color: var(--secondary-color);
 }
+
 /* --- НОВОЕ: Стили Модального Окна (Pop-up) --- */
 .modal {
-    display: none; /* Скрыто по умолчанию */
-    position: fixed; /* Закреплено на экране */
-    z-index: 2000; /* Очень высокий Z-index, чтобы быть поверх всего */
-    padding-top: 50px; 
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 50px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.9); /* Черный с прозрачностью */
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
     cursor: pointer;
 }
 
@@ -396,7 +441,7 @@ h2 {
     width: 90%;
     max-width: 700px;
     max-height: 90vh;
-    object-fit: contain; /* Чтобы фото не обрезалось */
+    object-fit: contain;
     animation-name: zoom;
     animation-duration: 0.6s;
     border-radius: 5px;
@@ -404,7 +449,7 @@ h2 {
 
 /* Анимация (Масштабирование) */
 @keyframes zoom {
-    from {transform: scale(0.1)} 
+    from {transform: scale(0.1)}
     to {transform: scale(1)}
 }
 
@@ -422,7 +467,7 @@ h2 {
 
 .close-btn:hover,
 .close-btn:focus {
-    color: var(--primary-color); /* Розовый при наведении */
+    color: var(--primary-color);
     text-decoration: none;
     cursor: pointer;
 }
@@ -441,9 +486,10 @@ h2 {
 
 /* Делаем фото в хронике кликабельными */
 .timeline-clickable-photo {
-    cursor: zoom-in; /* Курсор-лупа */
+    cursor: zoom-in;
     transition: transform 0.2s;
 }
+
 .timeline-clickable-photo:active {
     transform: scale(0.98);
 }
