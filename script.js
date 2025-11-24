@@ -96,7 +96,7 @@ const VIDEO_GROUP_DATA = {
 const LEGEND_DATA = {
     // 1. СЛЕНГ: Слова-замены (без 'info')
     jargon: {
-        title: "Наш сленг 💬",
+        title: "Наш нуберский сленг 💬",
         items: [
             { phrase: "Боже → Бозе" },
             { phrase: "Спасибо → Сепаратор, Сепик, Семпик" },
@@ -192,14 +192,14 @@ setInterval(updateCountdown, 1000);
 
 function renderLegend() {
     const legendSection = document.getElementById('legend');
-    if (!legendSection) return; // Проверка на существование элемента
+    if (!legendSection) return; 
 
     let htmlContent = `
         <h2 class="section-title">📚 Наш мега крутой словарь</h2>
         <p class="section-description">слова, фразы и обращения, которые понимаем только мы</p>
     `;
-
-    // Перебираем категории из LEGEND_DATA
+    
+    // Генерация категорий (не меняется)
     for (const key in LEGEND_DATA) {
         const category = LEGEND_DATA[key];
         
@@ -219,6 +219,16 @@ function renderLegend() {
             </div>
         `;
     }
+
+    // --- НОВОЕ: Добавляем кнопку в конце страницы ---
+    htmlContent += `
+        <div style="text-align: center; margin-top: 40px; margin-bottom: 30px;">
+            <a href="interact.html" class="cta-button">
+                Создать послание для него
+            </a>
+        </div>
+    `;
+    // --------------------------------------------------
 
     legendSection.innerHTML = htmlContent;
 }

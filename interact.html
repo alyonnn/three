@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💘</title>
+    <link rel="stylesheet" href="interact.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="interactive-container">
+        
+        <h1 id="main-title">Сделано с любовью</h1>
+        
+        <div class="message-text">
+            <p>
+                Стасюшка, ты добрался до финала этого маленького путешествия. 
+                Ты пролистал страницы нашей истории, вспомнил наш тайный язык, просмотрел фотографии и моменты. 
+                По сути, ты пролистал не просто сайт, а нашу общую историю, созданную специально для тебя.
+            </p>
+            <p>
+                Но знай, что это еще далеко не конец. Наша история не заканчивается здесь, она только начинается!
+            </p>
+            <p>
+                Я создавала этот сайт, чтобы через 5, 10, а может и 50 лет, мы могли просто открыть эту ссылку, 
+                увидеть старые фото, вспомнить все наши "пэжики" и "сепараторы", вспомнить песни , которые мы постоянно напевали друг другу и то, во что мы обычно играли на парах. Вспомнить каждый наш счастливый день, каждый прикол.
+            </p>
+            <p style="font-style: italic; font-weight: bold; margin-top: 30px;">
+                Спасибо тебе за эти 3 года, наполненные любовью, смехом и поддержкой. 
+                Ты — мой лучший друг и самый любимый партнер.
+            </p>
+            <p style="font-weight: bold;">Люблю тебя очень очень!💓<br>твоя аленка</p>
+        </div>
+
+        <hr style="border-top: 1px solid var(--secondary-color); margin: 30px 0;">
+
+        <button id="showSecretPhotos" class="cta-button">
+            🎁как создавался блокнот
+        </button>
+        
+        <a href="secret.html" class="cta-button" style="background-color: #666; margin-top: 15px;">
+            <i class="fas fa-arrow-left"></i>  на главную
+        </a>
+    </div>
+
+
+    <div id="secretModal" class="modal">
+        <span class="close-btn" id="closeSecretModal">&times;</span>
+        <div class="modal-content-wrapper">
+            <h3 style="color: white; margin-bottom: 20px;">Процесс создания сюрприза!</h3>
+            <div id="photoGrid" class="photo-grid">
+                <img src="img/photo_2025-11-24_16-53-43.jpg" alt="Блокнот, фото 1" class="photo-zoomable">
+                <img src="img/photo_2025-11-24_16-53-53.jpg" alt="Блокнот, фото 2" class="photo-zoomable">
+                <img src="img/photo_2025-11-24_16-53-58.jpg" alt="Блокнот, фото 3" class="photo-zoomable">
+            </div>
+        </div>
+    </div>
+    
+    <div id="photoViewerModal" class="modal">
+        <span class="close-btn" id="closePhotoViewer">&times;</span>
+        <img class="modal-content-viewer" id="fullImage">
+    </div>
+
+    <script>
+        // === Логика открытия/закрытия сетки превью (#secretModal) ===
+        const secretModal = document.getElementById("secretModal");
+        const showBtn = document.getElementById("showSecretPhotos");
+        const closeSecretBtn = document.getElementById("closeSecretModal");
+
+        showBtn.onclick = function() {
+            secretModal.style.display = "block";
+        }
+
+        closeSecretBtn.onclick = function() {
+            secretModal.style.display = "none";
+        }
+
+        // === Логика открытия/закрытия увеличенного просмотра (#photoViewerModal) ===
+        const viewerModal = document.getElementById("photoViewerModal");
+        const fullImage = document.getElementById("fullImage");
+        const closeViewerBtn = document.getElementById("closePhotoViewer");
+        const zoomablePhotos = document.querySelectorAll(".photo-zoomable");
+
+        // Функция для закрытия большого модального окна
+        closeViewerBtn.onclick = function() {
+            viewerModal.style.display = "none";
+        }
+
+        // Обработчик клика по каждой превью-картинке
+        zoomablePhotos.forEach(img => {
+            img.addEventListener('click', function() {
+                // Берем источник (src) кликнутой маленькой картинки
+                fullImage.src = this.src; 
+                // Открываем большое модальное окно
+                viewerModal.style.display = "block"; 
+            });
+        });
+
+        // Закрытие по клику вне модальных окон
+        window.onclick = function(event) {
+            if (event.target == secretModal) {
+                secretModal.style.display = "none";
+            }
+            if (event.target == viewerModal) {
+                viewerModal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

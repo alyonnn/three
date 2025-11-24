@@ -197,6 +197,7 @@ background: rgba(255, 255, 255, 0.95); /* Почти непрозрачный б
     border-radius: 30px;
     padding: 12px 25px;
     font-size: 1.1em;
+    text-decoration: none; /* <-- ЭТО УБИРАЕТ ПОДЧЕРКИВАНИЕ У ССЫЛОК */
     font-weight: bold;
     cursor: pointer;
     box-shadow: var(--shadow-light);

@@ -1,0 +1,174 @@
+/* interact.css */
+
+/* Импортируем шрифты и общие переменные из основного CSS */
+/* Если вы не можете импортировать, скопируйте блок :root из style.css сюда */
+:root {
+    --primary-color: #e91e63; /* Глубокий розовый/фуксия */
+    --secondary-color: #fce4ec; /* Очень светлый розовый */
+    --accent-color: #f06292; /* Средний розовый */
+    --text-color: #333; /* Темный текст */
+    --body-font: 'Quicksand', sans-serif;
+    --transition-speed: 0.4s;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--secondary-color); /* Светло-розовый фон */
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    align-items: center; /* Центрирует по вертикали */
+    justify-content: center; /* Центрирует по горизонтали */
+    margin: 0;
+}
+
+.interactive-container {
+    padding: 30px;
+    max-width: 600px;
+    margin: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.interactive-container h1 {
+    color: var(--primary-color);
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.interactive-container p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.interactive-container ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.interactive-container ul li {
+    background-color: #fff0f5; /* Очень светлый акцент */
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+    font-size: 0.95em;
+}
+
+/* Стилизация кнопки CTA (Копируем из style.css, чтобы она работала и здесь) */
+.cta-button {
+    display: inline-block; /* Важно для <a> */
+    margin-top: 25px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    transition: background-color 0.3s ease, transform 0.2s;
+    text-decoration: none; /* Убираем подчеркивание для ссылки */
+}
+
+.cta-button:hover {
+    background-color: #ff6699;
+    transform: translateY(-2px);
+}
+/* Добавьте в interact.css (или создайте, если не было) */
+
+/* Модальное окно (Pop-up) */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.95); /* Темный полупрозрачный фон */
+    padding-top: 50px;
+}
+
+.modal-content-wrapper {
+    margin: auto;
+    width: 90%;
+    max-width: 900px;
+    padding: 20px;
+    text-align: center;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 2-3 колонки */
+    gap: 15px;
+    padding: 10px;
+}
+
+.photo-grid img {
+    width: 100%;
+    height: 300px; /* Фиксированная высота для единообразия */
+    object-fit: cover; /* Обрезает, но заполняет контейнер */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.photo-grid img:hover {
+    transform: scale(1.02);
+}
+
+/* Кнопка Закрытия */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Обновляем стили модального окна для просмотра большого фото */
+
+.modal-content-viewer {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 900px; /* Максимальная ширина большого фото */
+    height: auto; /* Позволяет сохранить пропорции */
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+/* Стили для сетки превью (убедитесь, что они уже есть) */
+.photo-grid img {
+    /* Добавьте курсор, чтобы показать, что на фото можно кликнуть */
+    cursor: zoom-in;
+    
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    transition: transform 0.2s;
+}
+
+.photo-grid img:hover {
+    transform: scale(1.02);
+}
