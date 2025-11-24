@@ -224,7 +224,7 @@ function renderLegend() {
     htmlContent += `
         <div style="text-align: center; margin-top: 40px; margin-bottom: 30px;">
             <a href="interact.html" class="cta-button">
-                Создать послание для него
+               💌
             </a>
         </div>
     `;
