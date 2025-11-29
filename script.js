@@ -181,21 +181,33 @@ function updateCountdown() {
     const diff = now.getTime() - START_DATE.getTime();
     
     // ----------------------------------------------------------------
-    // 1. РАСЧЕТ ЧАСЫ:МИНУТЫ:СЕКУНДЫ (Для основного счетчика: #countdown-hms)
+    // 1. РАСЧЕТ ТОЛЬКО ДНЕЙ (Для основного счетчика: #countdown-hms)
     // ----------------------------------------------------------------
     
     // Общее количество секунд, прошедших с начала отношений
     let totalSeconds = Math.floor(diff / 1000);
+    
+    // Считаем общее количество дней
+    const totalDays = Math.floor(totalSeconds / (3600 * 24));
+    
+    // --- ФОРМАТИРОВАНИЕ СЛОВА "ДНЕЙ" ---
+    let daysLabel = "дней";
+    const lastDigit = totalDays % 10;
+    const lastTwoDigits = totalDays % 100;
 
-    // Рассчитываем ЧЧ:ММ:СС, которые перезапускаются каждые 24 часа
-    const seconds = totalSeconds % 60;
-    const minutes = Math.floor(totalSeconds / 60) % 60;
-    const hours = Math.floor(totalSeconds / 3600) % 24;
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+        daysLabel = "дней"; // 11, 12, ..., 19 дней
+    } else if (lastDigit === 1) {
+        daysLabel = "день"; // 1, 21, 31 день
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+        daysLabel = "дня"; // 2, 3, 4, 22, 23, 24 дня
+    } else {
+        daysLabel = "дней"; // 5, 6, 7, 8, 9, 0 дней
+    }
 
-    const hmsString = 
-        String(hours).padStart(2, '0') + ':' + 
-        String(minutes).padStart(2, '0') + ':' + 
-        String(seconds).padStart(2, '0');
+    // Сохраняем только количество дней и слово
+    const hmsString = `${totalDays} ${daysLabel}`;
+    // -----------------------------------------
 
     // Обновляем главный счетчик
     const hmsElement = document.getElementById('countdown-hms');
@@ -204,7 +216,7 @@ function updateCountdown() {
     }
     
     // ----------------------------------------------------------------
-    // 2. РАСЧЕТ ГОДЫ:МЕСЯЦЫ:ДНИ (Для детального счетчика: #countdown-ymd)
+    // 2. РАСЧЕТ ГОДЫ:МЕСЯЦЫ:ДНИ (Остается для детального счетчика)
     // ----------------------------------------------------------------
     
     let years = now.getFullYear() - START_DATE.getFullYear();
@@ -214,7 +226,6 @@ function updateCountdown() {
     // Корректировка, если текущий день меньше стартового
     if (days < 0) {
         months--;
-        // Определяем количество дней в предыдущем месяце
         const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
         days += prevMonth.getDate();
     }
@@ -225,7 +236,12 @@ function updateCountdown() {
         months += 12;
     }
 
-    const ymdString = `${years} года ${months} месяцев ${days} дней`;
+    // Добавляем склонение для месяцев и лет
+    let yearsLabel = (years === 1) ? "год" : (years >= 2 && years <= 4) ? "года" : "лет";
+    let monthsLabel = (months === 1) ? "месяц" : (months >= 2 && months <= 4) ? "месяца" : "месяцев";
+    let ymdDaysLabel = (days === 1) ? "день" : (days >= 2 && days <= 4) ? "дня" : "дней";
+
+    const ymdString = `${years} ${yearsLabel}, ${months} ${monthsLabel}, ${days} ${ymdDaysLabel}`;
     
     // Обновляем детальный счетчик
     const ymdElement = document.getElementById('countdown-ymd');
@@ -234,10 +250,9 @@ function updateCountdown() {
     }
 }
 
-// Запускаем таймер сразу и обновляем каждую секунду
+// Запускаем таймер сразу и обновляем каждую секунду (хотя дни меняются раз в сутки)
 updateCountdown();
 setInterval(updateCountdown, 1000);
-
 // ----------------------------------------------------
 // 5. ЛОГИКА НОВОЙ СТРАНИЦЫ "ЛЕГЕНДА"
 // ----------------------------------------------------
