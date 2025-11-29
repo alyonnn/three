@@ -103,6 +103,8 @@ const LEGEND_DATA = {
             { phrase: "Пожалуйста → Пэжик" },
              { phrase: "Люблю тебя → Лавю, ловелас, ловстер, лувики" },
               { phrase: "Жестко → Джойстик" },
+                            { phrase: "Прикольно → Брыголна" },
+
                             { phrase: "Лучший → Лучик" },
                                           { phrase: "Возможно → Эмбе, эмбер" },
 
@@ -150,6 +152,8 @@ const LEGEND_DATA = {
             { phrase: "Хобби: собирать лего", info: "ты бы ответил это, если бы мы у тебя спросили о моем хобби" },
             { phrase: "Stickman party / 234", info: "наши любимые игры на скучных парах" },
             { phrase: "Шмяк шмяк Буль Буль", info: "это на словах не объяснить, можно ток показать😁" },
+                        { phrase: "Не заудь про капюшончик", info: "сам сочинил и удивляется почему я не знаю эту песню эмм" },
+
             { phrase: "Аляска куртка", info: "так я называла твою суперскую куртку" }
         ]
     },
@@ -170,21 +174,69 @@ const LEGEND_DATA = {
 
 
 // --- 4. Функция Счетчик Дней (БЕЗ ИЗМЕНЕНИЙ) ---
+// !!! ВАЖНО: 02 декабря 2022 года !!!
+
 function updateCountdown() {
     const now = new Date();
-    const diff = now - START_DATE;
+    const diff = now.getTime() - START_DATE.getTime();
     
-    const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const totalHours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const totalMinutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    // ----------------------------------------------------------------
+    // 1. РАСЧЕТ ЧАСЫ:МИНУТЫ:СЕКУНДЫ (Для основного счетчика: #countdown-hms)
+    // ----------------------------------------------------------------
+    
+    // Общее количество секунд, прошедших с начала отношений
+    let totalSeconds = Math.floor(diff / 1000);
 
-    document.getElementById('days').textContent = totalDays.toLocaleString();
-    document.getElementById('hours').textContent = totalHours.toLocaleString().padStart(2, '0');
-    document.getElementById('minutes').textContent = totalMinutes.toLocaleString().padStart(2, '0');
+    // Рассчитываем ЧЧ:ММ:СС, которые перезапускаются каждые 24 часа
+    const seconds = totalSeconds % 60;
+    const minutes = Math.floor(totalSeconds / 60) % 60;
+    const hours = Math.floor(totalSeconds / 3600) % 24;
+
+    const hmsString = 
+        String(hours).padStart(2, '0') + ':' + 
+        String(minutes).padStart(2, '0') + ':' + 
+        String(seconds).padStart(2, '0');
+
+    // Обновляем главный счетчик
+    const hmsElement = document.getElementById('countdown-hms');
+    if (hmsElement) {
+        hmsElement.textContent = hmsString;
+    }
+    
+    // ----------------------------------------------------------------
+    // 2. РАСЧЕТ ГОДЫ:МЕСЯЦЫ:ДНИ (Для детального счетчика: #countdown-ymd)
+    // ----------------------------------------------------------------
+    
+    let years = now.getFullYear() - START_DATE.getFullYear();
+    let months = now.getMonth() - START_DATE.getMonth();
+    let days = now.getDate() - START_DATE.getDate();
+
+    // Корректировка, если текущий день меньше стартового
+    if (days < 0) {
+        months--;
+        // Определяем количество дней в предыдущем месяце
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+    }
+
+    // Корректировка, если текущий месяц меньше стартового
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    const ymdString = `${years} года ${months} месяцев ${days} дней`;
+    
+    // Обновляем детальный счетчик
+    const ymdElement = document.getElementById('countdown-ymd');
+    if (ymdElement) {
+        ymdElement.textContent = ymdString;
+    }
 }
 
+// Запускаем таймер сразу и обновляем каждую секунду
 updateCountdown();
-setInterval(updateCountdown, 1000); 
+setInterval(updateCountdown, 1000);
 
 // ----------------------------------------------------
 // 5. ЛОГИКА НОВОЙ СТРАНИЦЫ "ЛЕГЕНДА"

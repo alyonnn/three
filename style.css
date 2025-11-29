@@ -841,3 +841,36 @@ padding: 0 5px;
     font-style: italic;
     line-height: 1.4;
 }
+/* style.css */
+
+.timer-container {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.timer-main {
+    font-size: 3em; /* Основной крупный шрифт */
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 5px; /* Небольшой отступ от детального счетчика */
+}
+
+.timer-detail {
+    font-size: 1.1em; /* Меньший шрифт для деталей */
+    font-weight: 500;
+    color: var(--text-color); /* Или более мягкий цвет, например #666 */
+    padding: 5px 15px;
+    border-radius: 20px;
+    display: inline-block; /* Чтобы фон был только вокруг текста */
+    background-color: var(--secondary-color);
+}
+
+/* Если нужно сделать детальный счетчик еще меньше на мобильных: */
+@media (max-width: 600px) {
+    .timer-main {
+        font-size: 2.5em;
+    }
+    .timer-detail {
+        font-size: 1em;
+    }
+}

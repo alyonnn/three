@@ -104,26 +104,53 @@ body {
     text-align: center;
 }
 
+/* Обновленный photo-grid, чтобы учитывать место для подписей */
 .photo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 2-3 колонки */
+    /* Уменьшаем минимальную ширину колонки, чтобы вместить больше фоток на широких экранах */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
     gap: 15px;
     padding: 10px;
+    justify-content: center;
 }
 
-.photo-grid img {
+/* НОВЫЕ СТИЛИ ДЛЯ ПОДПИСЕЙ К ФОТО */
+.photo-item-with-caption {
+    display: flex; /* Выстраивает элементы вертикально */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+/* КОНЕЦ НОВЫХ СТИЛЕЙ */
+
+.photo-grid img,
+.photo-item-with-caption img { /* Применяем стили к img внутри обертки */
     width: 100%;
-    height: 300px; /* Фиксированная высота для единообразия */
+    height: 200px; /* Снизил высоту для лучшей мобильной адаптации */
+    max-height: 300px;
     object-fit: cover; /* Обрезает, но заполняет контейнер */
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
     cursor: pointer;
     transition: transform 0.2s;
+    margin-bottom: 5px; /* Отступ от картинки до подписи */
 }
 
-.photo-grid img:hover {
+.photo-grid img:hover,
+.photo-item-with-caption img:hover {
     transform: scale(1.02);
 }
+
+/* Стиль для подписи */
+.photo-caption {
+    color: #ccc; /* Светлый, читаемый цвет текста */
+    font-size: 0.9em; 
+    margin: 0;
+    padding: 0 5px;
+    /* Дополнительно: чтобы подпись была в нижнем регистре, как и остальной текст */
+    text-transform: lowercase; 
+}
+
 
 /* Кнопка Закрытия */
 .close-btn {
